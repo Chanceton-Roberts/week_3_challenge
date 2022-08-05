@@ -1,14 +1,14 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 let lowercasearray=["a","b","c","d","e","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-let capitalcasearray=["A","B","C","D","E","F","G",'H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+let uppercasearray=["A","B","C","D","E","F","G",'H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 let numbersarray=["0","1",'2','3','4','5','6','7','8','9']
-let specialcarrecterarray=["!","@",'#','$','%','^','&','*','(',')','-','_','=','+','?','<','>','[',']','{','}']
+let specialarray=["!","@",'#','$','%','^','&','*','(',')','-','_','=','+','?','<','>','[',']','{','}']
 let lowercaseboolean;
-let capitalcaseboolean;
+let uppercaseboolean;
 let numbersboolean;
-let specialcarrecterboolean;
-let validcaracters=[]
+let specialboolean;
+let validcharacters=[]
   
   // Write password to the #password input
 function writePassword() {
@@ -19,32 +19,55 @@ function writePassword() {
 
 }
 
-function generatePassword(length){
+
+
+
+function generatePassword(){
+
+  let lengthofpassword = prompt("Enter password legnth");
+
+  let lowercaseboolean=confirm("Do you want lowercase?");
+  let uppercaseboolean=confirm("Do you want uppercase?");
+  let numbersboolean=confirm("Do you want numbers?");
+  let specialboolean=confirm("Do you want special caracters?");
+
+
   if(lowercaseboolean){
-    validcaracters.push(lowercasearray)
+    for(i = 0; i < lengthofpassword ; i++){
+    console.log (lowercasearray[i])
+     var randomlowercase = lowercasearray[Math.floor((Math.random()*lowercasearray.length))];
+   validcharacters.push (randomlowercase)
+    }
+   };
 
-  }else if(capitalcaseboolean){
-    validcaracters.push (capitalcasearray)
-  }else if(numbersboolean){
-    validcaracters.push (numbersarray)
-  }else if ( specialcarrecterboolean){
-    validcaracters.push(specialcarrecterarray)
-  } 
   
-}
+  if(uppercaseboolean){
+    for (i=0; i < lengthofpassword; i++) {
+    console.log (uppercasearray[i])
+    var randomuppercase = uppercasearray[Math.floor((Math.random()*uppercasearray.length))];
+    validcharacters.push (randomuppercase)
+    }
+  };
 
-function initialquestions() {
-  let lengthofpassword= prompt("Enter password legnth");
+  if(numbersboolean){
+    for(i = 0; i < lengthofpassword ; i++){
+      console.log (numbersarray[i])
+    var randomNumber = numbersarray[Math.floor((Math.random()*numbersarray.length))];
+    validcharacters.push (randomNumber)
+    }
+  };
+
+  if(specialboolean){
+    for(i = 0; i < lengthofpassword ; i++){
+    console.log (specialarray[i])
+    var randomspecial = specialarray[Math.floor((Math.random()*specialarray.length))];
+   validcharacters.push(randomspecial)
+    }
+  };
+
+  return validcharacters;
   
-  
+};
 
-  lowercaseboolean=confirm("Do you want lowercase?");
-  capitalcaseboolean=confirm("Do you want capitals?")
-  numbersboolean=confirm("Do you want numbers?")
-  specialcarrecterboolean=confirm("Do you want special caracters?")
-  generatePassword(lengthofpassword)
-
-}
-initialquestions()
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
